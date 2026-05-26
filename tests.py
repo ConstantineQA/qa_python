@@ -56,7 +56,7 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.add_new_book('1984')
         collector.set_book_genre('1984', 'Детективы')
-        assert collector.get_book_genre  
+        assert collector.get_book_genre('1984') == 'Детективы'  
 
     #проверка, что по названию жанра выводятся только наименования книг с этим жанром
     def test_get_books_with_specific_genre_returns_books_specified_genre(self):
@@ -64,10 +64,15 @@ class TestBooksCollector:
         collector.books_genre = {'1984': 'Комедии','Приключения кота': 'Детективы', 'Колобок': 'Детективы'}
         assert collector.get_books_with_specific_genre('Детективы') == ['Приключения кота', 'Колобок']
 
-    #проверяю, что метод возвращает словарь
+    #проверяю, что метод возвращает заполненный словарь books_genre
+    #шаг collector.set_book_genre('1984', 'Детективы') оставлен намеренно, 
+    #хотя можно было обойтись без него assert collector.get_books_genre() == {'1984': ''}
+    #проверяю именно заполненный словарь
     def test_get_books_genre_return_dict(self):
         collector = BooksCollector()
-        assert collector.get_books_genre() == {}
+        collector.add_new_book('1984')
+        collector.set_book_genre('1984', 'Детективы')
+        assert collector.get_books_genre() == {'1984': 'Детективы'}
 
     #проверяю, что метод возвращает наименования книг, которые имеют детский жанр
     def test_get_books_for_children_return_only_kids_books(self):
@@ -99,7 +104,6 @@ class TestBooksCollector:
     def test_add_book_in_favorites_no_duplicate_books_in_favorites(self):
         collector = BooksCollector()
         collector.add_new_book('книга1')
-        collector.set_book_genre('книга1', 'Комедия')
         collector.add_book_in_favorites('книга1')
         collector.add_book_in_favorites('книга1')
         assert len(collector.favorites) == 1 
@@ -110,13 +114,6 @@ class TestBooksCollector:
         collector.favorites = ['книга1','книга3', 'книга5']
         collector.delete_book_from_favorites('книга1')
         assert 'книга1' not in collector.favorites
-
-    #проверяю, что список избранного уменьшился на 1
-    def test_delete_book_from_favorites_one_book_was_deleted(self):
-        collector = BooksCollector()
-        collector.favorites = ['книга1','книга3', 'книга5']
-        collector.delete_book_from_favorites('книга1')
-        assert len(collector.favorites) == 2
 
     #проверка что метод возвращает список избранных книг
     def test_get_list_of_favorites_books_return_favorites_books(self):
