@@ -12,7 +12,7 @@
 ### get_books_with_specific_genre()
 1. **test_get_books_with_specific_genre_returns_books_specified_genre** - Проверка, что по названию жанра метод возвращает только наименования книг с этим жанром
 ### get_books_genre()
-1. **test_get_books_genre_return_dict** - Проверка, что метод возвращает словарь 
+1. **test_get_books_genre_return_dict** - Проверка, что метод возвращает словарь books_genre
 ### test_get_books_for_children()
 1. **test_get_books_for_children_return_only_kids_books** - Проверка, что метод возвращает наименования книг, которым присвоен детский жанр(не входящий в genre_age_rating)
 ### test_add_book_in_favorites()
@@ -21,6 +21,5 @@
 3. **def test_add_book_in_favorites_no_duplicate_books_in_favorites** - Проверка, что в избранное одну и ту же книгу можно добавить один раз
 ### delete_book_from_favorites()
 1. **test_delete_book_from_favorites_deleted_book_not_in_favorites** - проверка, что метод удаляет наименование книги из избранного
-2. **test_delete_book_from_favorites_one_book_was_deleted** - Проверка, что длина списка уменьшается именно на 1 после удаления книги из избранного
 ### get_list_of_favorites()
 1. **test_get_list_of_favorites_books_return_favorites_books** - проверка, что метод возвращает список названий книг из избранного
